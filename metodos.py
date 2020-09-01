@@ -1,4 +1,5 @@
 import csv
+import random
 
 #Método para ler a entrada do arquivo csv
 def leitor_csv():
@@ -34,9 +35,20 @@ def construcao_gulosa():
         resultado.append(r)
         capacidade += r["Peso"]
 
-def vizinho_mais_proximo():
+#Método com o algoritmo da construção aleatoria
+def construcao_aleatoria():
+    lista = leitor_csv()
+    capacidade = 0
+    resultado = []
 
+    while capacidade <= 100: #Enquanto houver capacidade
+        item = random.choice(lista) #Escolhe aleatoriamente o item a ser inserido
+        resultado.append(item)
+        capacidade += item["Peso"]
+        x = 0
+        for i in lista:
+            if item == i:
+                del (lista[x]) #Remove o item escolhido da lista para que não seja escolhido novamente
+            x += 1
 
-
-
-
+    return resultado
