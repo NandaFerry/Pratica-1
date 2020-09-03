@@ -1,5 +1,7 @@
+from caixeiroViajante import CaixeiroViajante
 import csv
 import random
+import sys
 
 #Método para ler a entrada do arquivo csv
 def leitor_csv():
@@ -52,3 +54,17 @@ def construcao_aleatoria():
             x += 1
 
     return resultado
+
+def import_graph():
+    with open("arquivo/questao_2.csv") as csvfile:
+        graphFile = csv.reader(csvfile)
+        graph = [[int(row[i]) for i in range(len(row))] for row in graphFile]
+        return graph
+
+def caixeiro_viajante():
+    graph = import_graph()
+    vertices = len(graph)
+    cv = CaixeiroViajante(vertices)
+    result = sys.maxsize #Estipula se um numero muito alto para achar um menor valor
+    result = cv.start(graph, 0, 1, 0, result)
+    return result
